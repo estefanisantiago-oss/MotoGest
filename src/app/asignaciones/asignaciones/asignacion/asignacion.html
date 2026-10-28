@@ -1,1 +1,76 @@
-<p>asignacion works!</p>
+<header>
+    <h1>Módulo de Asignación de Vehículos</h1>
+    <p>Administra la relación entre conductores y vehículos.</p>
+</header>
+
+<main>
+    <section>
+        <h2>Nueva asignación</h2>
+
+        <form action="" method="post">
+            <label for="tipo-vehiculo">Tipo de vehículo</label>
+            <select name="tipo-vehiculo" id="tipo-vehiculo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="mototaxi">Moto taxi</option>
+            </select>
+
+            <label for="seleccionar-vehiculo">Vehículo registrado</label>
+            <select name="vehiculo" id="seleccionar-vehiculo" required>
+                <option value="">Selecciona el vehículo</option>
+                <option value="1">Moto #001</option>
+                <option value="2">Moto #002</option>
+                <option value="3">Moto #003</option>
+                <option value="4">Moto #004</option>
+                <option value="5">Moto #005</option>
+            </select>
+
+            <label for="seleccionar-conductor">Conductor activo</label>
+            <select name="conductor" id="seleccionar-conductor" required>
+                <option value="">Selecciona el conductor</option>
+                <option value="1">Usuario 1</option>
+                <option value="2">Usuario 2</option>
+            </select>
+
+            <label for="fecha-asignacion">Fecha de asignación</label>
+            <input
+                type="date" name="fecha-asignacion" id="fecha-asignacion" required>
+
+            <button type="submit">Registrar asignación</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Asignaciones registradas</h2>
+
+        <label for="estado-asignacion">Filtrar por estado</label>
+        <select name="estado" id="estado-asignacion">
+            <option value="todas">Todas las asignaciones</option>
+            <option value="activa">Activas</option>
+            <option value="finalizada">Históricas / Finalizadas</option>
+        </select>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Vehículo</th>
+                    <th>Conductor</th>
+                    <th>Fecha de asignación</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="button">Finalizar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
