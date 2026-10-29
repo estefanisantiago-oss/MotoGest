@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Registro } from './gestion_de_vehiculos/registro/registro';
+
 @Component({
-  imports: [Registro],
+  imports: [RouterOutlet, Registro],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -10,3 +11,4 @@ import { Registro } from './gestion_de_vehiculos/registro/registro';
 export class App {
   protected readonly title = signal('MotoGest');
 }
+
