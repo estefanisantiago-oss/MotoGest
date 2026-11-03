@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
-import { Registro } from './gestion_de_vehiculos/registro/registro';
+import { Registromi } from './components/registromi/registromi';
 
 export const routes: Routes = [
-    {path: '',component: Registro},
-    {path:'**',redirectTo:''}
+  { path: '', component: Registromi },
+  { path: '**', redirectTo: '' },
 ];
