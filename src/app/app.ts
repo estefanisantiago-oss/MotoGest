@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
- Samantha
 import { Registromi } from '../app/components/registromi/registromi'; 
 @Component({
   imports: [RouterOutlet, Registromi]

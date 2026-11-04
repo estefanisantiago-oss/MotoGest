@@ -20,18 +20,68 @@ interface Reporte {
   templateUrl: './registromi.html',
 })
 export class Registromi {
+  titulo = 'MotoGest';
+  mostrar = false;
   busqueda = '';
   filtro = 'Todos';
   vista = 'tarjetas';
   mostrarFormulario = false;
 
   reportes: Reporte[] = [
-    { id: 1042, tipo: 'Incidente', vehiculo: 'Nissan NP300 - ABC123', descripcion: 'Falla en el sistema de frenos', prioridad: 'Alta', estado: 'Abierto', fecha: '01/11/2026' },
-    { id: 1041, tipo: 'Mantenimiento', vehiculo: 'Toyota Hilux - DEF456', descripcion: 'Cambio de aceite y filtros', prioridad: 'Media', estado: 'En proceso', fecha: '31/10/2026' },
-    { id: 1040, tipo: 'Incidente', vehiculo: 'Ford Transit - GHI789', descripcion: 'Falla en luces delanteras', prioridad: 'Media', estado: 'Abierto', fecha: '30/10/2026' },
-    { id: 1039, tipo: 'Mantenimiento', vehiculo: 'Chevrolet Aveo - JKL321', descripcion: 'Revisión general del motor', prioridad: 'Baja', estado: 'Completado', fecha: '28/10/2026' },
-    { id: 1038, tipo: 'Mantenimiento', vehiculo: 'Nissan Versa - MNO654', descripcion: 'Cambio de llantas', prioridad: 'Baja', estado: 'Completado', fecha: '27/10/2026' },
-    { id: 1037, tipo: 'Incidente', vehiculo: 'Volkswagen Vento - PQR987', descripcion: 'Golpe en defensa trasera', prioridad: 'Alta', estado: 'En proceso', fecha: '26/10/2026' },
+    {
+      id: 1042,
+      tipo: 'Incidente',
+      vehiculo: 'Nissan NP300 - ABC123',
+      descripcion: 'Falla en el sistema de frenos',
+      prioridad: 'Alta',
+      estado: 'Abierto',
+      fecha: '01/11/2026',
+    },
+    {
+      id: 1041,
+      tipo: 'Mantenimiento',
+      vehiculo: 'Toyota Hilux - DEF456',
+      descripcion: 'Cambio de aceite y filtros',
+      prioridad: 'Media',
+      estado: 'En proceso',
+      fecha: '31/10/2026',
+    },
+    {
+      id: 1040,
+      tipo: 'Incidente',
+      vehiculo: 'Ford Transit - GHI789',
+      descripcion: 'Falla en luces delanteras',
+      prioridad: 'Media',
+      estado: 'Abierto',
+      fecha: '30/10/2026',
+    },
+    {
+      id: 1039,
+      tipo: 'Mantenimiento',
+      vehiculo: 'Chevrolet Aveo - JKL321',
+      descripcion: 'Revisión general del motor',
+      prioridad: 'Baja',
+      estado: 'Completado',
+      fecha: '28/10/2026',
+    },
+    {
+      id: 1038,
+      tipo: 'Mantenimiento',
+      vehiculo: 'Nissan Versa - MNO654',
+      descripcion: 'Cambio de llantas',
+      prioridad: 'Baja',
+      estado: 'Completado',
+      fecha: '27/10/2026',
+    },
+    {
+      id: 1037,
+      tipo: 'Incidente',
+      vehiculo: 'Volkswagen Vento - PQR987',
+      descripcion: 'Golpe en defensa trasera',
+      prioridad: 'Alta',
+      estado: 'En proceso',
+      fecha: '26/10/2026',
+    },
   ];
 
   mantenimientos = [
@@ -42,16 +92,27 @@ export class Registromi {
 
   nuevo = { tipo: 'Incidente', vehiculo: '', descripcion: '', prioridad: 'Media' };
 
-  get total() { return this.reportes.length; }
-  get pendientes() { return this.reportes.filter(r => r.estado !== 'Completado').length; }
-  get completados() { return this.reportes.filter(r => r.estado === 'Completado').length; }
-  get urgentes() { return this.reportes.filter(r => r.prioridad === 'Alta' && r.estado !== 'Completado').length; }
+  get total() {
+    return this.reportes.length;
+  }
+  get pendientes() {
+    return this.reportes.filter((r) => r.estado !== 'Completado').length;
+  }
+  get completados() {
+    return this.reportes.filter((r) => r.estado === 'Completado').length;
+  }
+  get urgentes() {
+    return this.reportes.filter((r) => r.prioridad === 'Alta' && r.estado !== 'Completado').length;
+  }
 
   get filtrados() {
     const texto = this.busqueda.trim().toLowerCase();
-    return this.reportes.filter(r =>
-      (this.filtro === 'Todos' || r.estado === this.filtro) &&
-      (r.vehiculo.toLowerCase().includes(texto) || r.descripcion.toLowerCase().includes(texto) || String(r.id).includes(texto))
+    return this.reportes.filter(
+      (r) =>
+        (this.filtro === 'Todos' || r.estado === this.filtro) &&
+        (r.vehiculo.toLowerCase().includes(texto) ||
+          r.descripcion.toLowerCase().includes(texto) ||
+          String(r.id).includes(texto)),
     );
   }
 
@@ -66,7 +127,7 @@ export class Registromi {
       alert('Completa el vehículo y la descripción');
       return;
     }
-    const nuevoId = Math.max(1000, ...this.reportes.map(r => r.id)) + 1;
+    const nuevoId = Math.max(1000, ...this.reportes.map((r) => r.id)) + 1;
     this.reportes.unshift({
       id: nuevoId,
       tipo: this.nuevo.tipo,
@@ -74,7 +135,7 @@ export class Registromi {
       descripcion: this.nuevo.descripcion.trim(),
       prioridad: this.nuevo.prioridad,
       estado: 'Abierto',
-      fecha: new Date().toLocaleDateString('es-MX')
+      fecha: new Date().toLocaleDateString('es-MX'),
     });
     this.nuevo = { tipo: 'Incidente', vehiculo: '', descripcion: '', prioridad: 'Media' };
     this.mostrarFormulario = false;
@@ -82,7 +143,7 @@ export class Registromi {
 
   eliminarReporte(id: number) {
     if (confirm('¿Deseas eliminar este reporte?')) {
-      this.reportes = this.reportes.filter(r => r.id !== id);
+      this.reportes = this.reportes.filter((r) => r.id !== id);
     }
   }
 }

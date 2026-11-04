@@ -89,4 +89,13 @@
       </form>
     </div>
   </div>
+  <div>
+    <h1>{{ titulo }}</h1>
+    <button type="button" (click)="mostrar = !mostrar">{{ mostrar ? 'ocultar' : 'mostrar' }}</button>
+    @if ({ mostrar }) {
+      <section class="Informacion">
+        <h1>hola</h1>
+      </section>
+    }
+  </div>
 </div>
