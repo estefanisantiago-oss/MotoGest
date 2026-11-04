@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './registro.css',
   templateUrl: './registro.html',
 })
-export class Registro {}
+export class Registro {
+
+  titulo='holamundo';
+  mostrar = false;
+}
 
 import { RouterLink } from '@angular/router'; 

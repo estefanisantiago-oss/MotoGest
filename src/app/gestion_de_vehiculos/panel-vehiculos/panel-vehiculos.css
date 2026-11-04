@@ -1,0 +1,32 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+:host ::ng-deep .p-menubar {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 15px 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+:host ::ng-deep .p-menubar-start h2 {
+    color: #2563eb;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 35px 0 0;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem-link {
+    border-radius: 6px;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem-text {
+    color: #374151;
+    font-weight: 500;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem-link:hover {
+    background: #eff6ff;
+}
