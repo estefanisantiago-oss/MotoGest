@@ -3,6 +3,16 @@
     <p>Administra la relación entre conductores y vehículos.</p>
 </header>
 
+<h1>{{Titulo}}</h1>
+<button type="button" (click)="Mostrar = !Mostrar">{{Mostrar? 'Ocultar' : 'Mostrar'}}</button>
+
+@if (Mostrar) {
+    <section class="Informacion">
+        <h3>Hola Mundo</h3>
+    </section>
+}
+
+
 <main>
     <section>
         <h2>Nueva asignación</h2>
