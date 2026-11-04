@@ -8,4 +8,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './registro.html',
 })
 export class Registro {
+  titulo='REGISTRO DE CONDUCTORES';
+  Mostrar=false;
 }
