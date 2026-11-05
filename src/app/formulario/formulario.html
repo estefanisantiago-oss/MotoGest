@@ -1,0 +1,25 @@
+<section>
+    <h1>Contacto</h1>
+    <form>
+        <label for="nombre">Nombre:</label>
+        <!--[] envia informacion al ts-->
+        <!--() recibe informacion del ts-->
+        <input type="text" [(ngModel)]="nombre" >
+        <button type="submit">Enviar</button>
+    </form>
+</section>
+
+ <!--Nos muestra una vista previa -->
+ <aside>
+    <h3> Vista previa</h3>
+ @if (nombre) {
+    <p>Nombre: {{nombre}}</p>
+}
+ @else{
+    <p>Sin informacion</p>
+ }
+
+ @if (enviado) {
+    <p>Formulario enviado</p>
+}
+</aside>

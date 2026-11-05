@@ -15,4 +15,14 @@
             <h3>Tu flota, bajo control</h3>
             <p>Organización, seguridad y eficiencia en un solo lugar.</p>
         </div>
+        <!--Interpolacion de variables -->
+        <h2>{{Titulo}}</h2>
+        <!--interpolacion con eventos -->
+        <button type="button" (click)="Mostrar = !Mostrar" > {{ Mostrar? 'Ocultar' : 'Mostrar' }} </button>
     </section>
+    @if (Mostrar) {
+
+        <section class="Informacion">
+            <h3>Hola Mundo</h3>
+        </section>
+    }

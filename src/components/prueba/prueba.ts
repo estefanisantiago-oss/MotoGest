@@ -8,4 +8,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './prueba.html',
 })
 export class Prueba {
+  Titulo = 'Prueba de Angular 17'; 
+  Mostrar = false;
 }
