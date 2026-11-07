@@ -11,3 +11,5 @@ export class Registro {
   titulo='REGISTRO DE CONDUCTORES';
   Mostrar=false;
 }
+
+

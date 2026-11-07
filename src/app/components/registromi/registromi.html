@@ -1,0 +1,92 @@
+<div class="sistema">
+  <aside class="menu">
+    <div class="logo"><span>⚙</span><div><strong>MOTO<span class="verde">GEST</span></strong><small>Gestión vehicular</small></div></div>
+    <nav>
+      <a class="activo" href="#inicio"> &nbsp; Panel principal</a>
+      <a href="#reportes"> &nbsp; Incidentes y reportes</a>
+      <a href="#proximos"> &nbsp; Mantenimientos</a>
+    </nav>
+    <div class="usuario"> &nbsp; Área de mantenimiento</div>
+  </aside>
+
+  <div class="contenido">
+    <header class="barra">
+      <div class="marca-movil">NEXUS<span class="verde">OPS</span></div>
+      <input type="text" placeholder="Buscar reporte o vehículo..." [(ngModel)]="busqueda" aria-label="Buscar reportes" />
+      <button class="principal" (click)="mostrarFormulario = true">+ Nuevo reporte</button>
+    </header>
+
+    <main id="inicio">
+      <div class="titulo">
+        <div><h1>Mantenimiento e Incidentes</h1><p>Panel de control de conductores y vehículos</p></div>
+        <span class="etiqueta">● Sistema de demostración</span>
+      </div>
+
+      <section class="resumen">
+        <div class="indicador"><div class="icono cyan">▤</div><p>Total de reportes</p><h2>{{ total }}</h2><small>Registros del sistema</small></div>
+        <div class="indicador"><div class="icono amarillo">◷</div><p>Pendientes / En proceso</p><h2>{{ pendientes }}</h2><small>Necesitan seguimiento</small></div>
+        <div class="indicador"><div class="icono verde-fondo">✓</div><p>Completados</p><h2>{{ completados }}</h2><small>Trabajos terminados</small></div>
+        <div class="indicador"><div class="icono rojo">!</div><p>Prioridad alta</p><h2>{{ urgentes }}</h2><small>Atención necesaria</small></div>
+      </section>
+
+      <div class="columnas">
+        <section class="principal-columna" id="reportes">
+          <div class="herramientas">
+            <div class="filtros">
+              <button [class.seleccionado]="filtro === 'Todos'" (click)="filtro = 'Todos'">Todos</button>
+              <button [class.seleccionado]="filtro === 'Abierto'" (click)="filtro = 'Abierto'">Abiertos</button>
+              <button [class.seleccionado]="filtro === 'En proceso'" (click)="filtro = 'En proceso'">En proceso</button>
+              <button [class.seleccionado]="filtro === 'Completado'" (click)="filtro = 'Completado'">Completados</button>
+            </div>
+            <div class="vistas">
+              <button [class.seleccionado]="vista === 'tarjetas'" (click)="vista = 'tarjetas'">▦</button>
+              <button [class.seleccionado]="vista === 'tabla'" (click)="vista = 'tabla'">☷</button>
+            </div>
+          </div>
+
+          <div *ngIf="filtrados.length === 0" class="panel vacio">No se encontraron reportes.</div>
+
+          <div class="reporte-grid" *ngIf="vista === 'tarjetas'">
+            <article class="reporte panel" *ngFor="let r of filtrados">
+              <div class="reporte-superior"><span class="folio">INC-{{ r.id }}</span><span class="prioridad" [ngClass]="r.prioridad.toLowerCase()">{{ r.prioridad }}</span></div>
+              <h3>{{ r.tipo }} - {{ r.vehiculo }}</h3>
+              <p class="descripcion">{{ r.descripcion }}</p>
+              <div class="detalle"> {{ r.vehiculo }}</div>
+              <div class="pie-reporte"><span>{{ r.fecha }}</span><span class="estado" [ngClass]="r.estado === 'Abierto' ? 'abierto' : (r.estado === 'En proceso' ? 'proceso' : 'terminado')">{{ r.estado }}</span></div>
+              <div class="acciones"><button (click)="cambiarEstado(r)">Cambiar estado</button><button class="eliminar" (click)="eliminarReporte(r.id)">Eliminar</button></div>
+            </article>
+          </div>
+
+          <div class="panel tabla-panel" *ngIf="vista === 'tabla' && filtrados.length > 0">
+            <table><thead><tr><th>Folio</th><th>Vehículo</th><th>Tipo</th><th>Prioridad</th><th>Estado</th><th>Acción</th></tr></thead>
+            <tbody><tr *ngFor="let r of filtrados"><td class="folio">INC-{{ r.id }}</td><td>{{ r.vehiculo }}</td><td>{{ r.tipo }}</td><td>{{ r.prioridad }}</td><td>{{ r.estado }}</td><td><button (click)="cambiarEstado(r)">Cambiar</button></td></tr></tbody></table>
+          </div>
+        </section>
+
+        <aside class="lateral-columna" id="proximos">
+          <section class="panel lateral-panel"><h3>◷ &nbsp; Próximos mantenimientos</h3>
+            <div class="proximo" *ngFor="let m of mantenimientos"><strong>{{ m.vehiculo }}</strong><p>{{ m.servicio }}</p><small>📅 {{ m.fecha }}</small></div>
+          </section>
+          <section class="panel lateral-panel"><h3>ℹ &nbsp; Información</h3><p class="texto-info">Aquí puedes consultar los reportes, cambiar sus estados y agregar nuevos registros.</p></section>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <div class="fondo-modal" *ngIf="mostrarFormulario" (click)="mostrarFormulario = false">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-titulo"><h2>Nuevo reporte</h2><button (click)="mostrarFormulario = false" aria-label="Cerrar">✕</button></div>
+      <form (ngSubmit)="agregarReporte()">
+        <label>Tipo de registro</label>
+        <select name="tipo" [(ngModel)]="nuevo.tipo"><option>Incidente</option><option>Mantenimiento</option></select>
+        <label>Vehículo y placas</label>
+        <input name="vehiculo" [(ngModel)]="nuevo.vehiculo" required placeholder="Ej. Nissan NP300 - ABC123" />
+        <label>Prioridad</label>
+        <select name="prioridad" [(ngModel)]="nuevo.prioridad"><option>Alta</option><option>Media</option><option>Baja</option></select>
+        <label>Descripción</label>
+        <textarea name="descripcion" [(ngModel)]="nuevo.descripcion" required rows="3" placeholder="Describe el problema o servicio"></textarea>
+        <div class="modal-botones"><button type="button" (click)="mostrarFormulario = false">Cancelar</button><button class="principal" type="submit">Guardar reporte</button></div>
+      </form>
+    </div>
+  </div>
+</div>
