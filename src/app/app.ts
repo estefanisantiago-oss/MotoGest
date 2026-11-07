@@ -1,19 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
- Samantha
-import { Registromi } from '../app/components/registromi/registromi'; 
-@Component({
-  imports: [RouterOutlet, Registromi]
-import { Registro } from './gestion_de_vehiculos/registro/registro';
+import { Navbar } from './componentes/navbar/navbar';
 
 @Component({
-  imports: [RouterOutlet, Registro],
- main
   selector: 'app-root',
-  styleUrl: './app.css',
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('MotoGest');
 }
-
